@@ -1,3 +1,4 @@
+const uniqid = require('uniqid');
 const cubes = [];
 
 exports.getAll = () => cubes.slice(); //vrashtame now masiv, a ne referenciq kam nego
@@ -5,7 +6,7 @@ exports.getAll = () => cubes.slice(); //vrashtame now masiv, a ne referenciq kam
 //exports.create = (name, description, difficultyLevel, imageUrl);
 exports.create = (cubeData) => {
     const newCube = {
-        id: cubes.length + 1,
+        id: uniqid(),
         ...cubeData
     };
 
