@@ -1,4 +1,5 @@
 const uniqid = require('uniqid');
+//const db = require('../db.json');
 const cubes = [];
 
 exports.getAll = () => cubes.slice(); //vrashtame now masiv, a ne referenciq kam nego
