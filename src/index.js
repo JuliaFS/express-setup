@@ -1,4 +1,5 @@
 const express = require('express');
+//const path = require('path');
 const handlebars = require('express-handlebars');
 
 const app = express();
@@ -14,7 +15,7 @@ app.set('views', 'src/views');  //nastroiva se, zashtoto direktoriqta e razlichn
 
 //Routes
 app.get('/', (req, res) => {
-    res.send('Hello..............!!!!!!!!')
+    //res.send('Hello..............!!!!!!!!')
     res.render('index');
 });
 
