@@ -1,10 +1,9 @@
 const express = require('express');
-//const path = require('path');
 const handlebars = require('express-handlebars');
 
 const app = express();
 
-const PORT = 3050;
+const PORT = 5000;
 
 // //Handlebrs configuration
 app.engine('hbs', handlebars.engine({
