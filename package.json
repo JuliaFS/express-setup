@@ -1,0 +1,26 @@
+{
+  "name": "express-setup",
+  "version": "1.0.0",
+  "description": "SoftUni Express workshop",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "nodemon src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JuliaFS/express-setup.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JuliaFS/express-setup/issues"
+  },
+  "homepage": "https://github.com/JuliaFS/express-setup#readme",
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
