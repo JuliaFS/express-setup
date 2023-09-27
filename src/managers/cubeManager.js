@@ -1,4 +1,5 @@
 const uniqid = require('uniqid');
+const { search } = require('../controllers/homeController');
 //const db = require('../db.json');
 const cubes = [
     {
@@ -17,7 +18,23 @@ const cubes = [
     }
 ];
 
-exports.getAll = () => cubes.slice(); //vrashtame now masiv, a ne referenciq kam nego
+exports.getAll = (search, from, to) => {
+    let result = cubes.slice(); //vrashtame now masiv, a ne referenciq kam nego
+
+    if(search){
+        result = result.filter(cube => cube.name.toLowerCase().includes(search.toLowerCase()));
+    }
+
+    if(from){
+        result = result.filter(cube => cube.difficultyLevel >= Number(from));
+    }
+
+    if(to){
+        result = result.filter(cube => cube.difficultyLevel <= Number(to));
+    }
+
+    return result;
+}
 
 exports.getOne = (cubeId) => cubes.find(x => x.id == cubeId);
 
