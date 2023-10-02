@@ -1,3 +1,4 @@
+const Cube = require('../models/Cube');
 const uniqid = require('uniqid');
 const { search } = require('../controllers/homeController');
 //const db = require('../db.json');
@@ -36,15 +37,13 @@ exports.getAll = (search, from, to) => {
     return result;
 }
 
-exports.getOne = (cubeId) => cubes.find(x => x.id == cubeId);
+//exports.getOne = (cubeId) => cubes.find(x => x.id == cubeId);
+exports.getOne = (cubeId) => Cube.findById(cubeId).lean();
 
 //exports.create = (name, description, difficultyLevel, imageUrl);
-exports.create = (cubeData) => {
-    const newCube = {
-        id: uniqid(),
-        ...cubeData
-    };
+exports.create = async (cubeData) => {
+    const cube = new Cube(cubeData);
+    await cube.save();
 
-    cubes.push(newCube);
-    return newCube;
+    return cube;
 }

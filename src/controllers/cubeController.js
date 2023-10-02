@@ -8,9 +8,15 @@ router.get('/create', (req, res) => {
     res.render('create');
 })
 
-router.post('/create', (req, res) => {
-    const {name, description, difficultyLevel, imageUrl } = req.body;
-    cubeManager.create({
+router.post('/create', async (req, res) => {
+    const {
+        name, 
+        description, 
+        difficultyLevel, 
+        imageUrl 
+    } = req.body;
+
+    await cubeManager.create({
         name, 
         description, 
         difficultyLevel: Number(difficultyLevel), 
@@ -18,8 +24,8 @@ router.post('/create', (req, res) => {
     res.redirect('/');
 })
 
-router.get('/:cubeId/details', (req, res) => {
-    const cube = cubeManager.getOne(req.params.cubeId);
+router.get('/:cubeId/details', async (req, res) => {
+    const cube = await cubeManager.getOne(req.params.cubeId);
 
     if(!cube){
         res.redirect('/404');
