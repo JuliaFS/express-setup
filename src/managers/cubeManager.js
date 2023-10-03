@@ -4,7 +4,7 @@ const { search } = require('../controllers/homeController');
 //const db = require('../db.json');
 
 exports.getAll = async (search, from, to) => {
-    let result = await Cube.find().lean(); //vrashtame now masiv, a ne referenciq kam nego
+    let result = await Cube.find().lean(); 
 
     if(search){
         result = result.filter(cube => cube.name.toLowerCase().includes(search.toLowerCase()));
