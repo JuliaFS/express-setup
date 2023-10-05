@@ -8,7 +8,11 @@ const cubeShema = new mongoose.Schema({
     accessories: [{
         type: mongoose.Types.ObjectId,
         ref: 'Accessory'
-    }]
+    }],
+    owner: {
+        type: mongoose.Types.ObjectId,
+        ref: 'User'
+    }
 });
 
 const Cube = mongoose.model('Cube', cubeShema);
