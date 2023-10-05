@@ -33,6 +33,10 @@ exports.create = (cubeData) => {
     return cube.save();
 }
 
+exports.delete = (cubeId) => Cube.findByIdAndDelete(cubeId);
+
+exports.update = (cubeId, cubeData) => Cube.findByIdAndUpdate(cubeId, cubeData);
+
 exports.attachAccessory = async (cubeId, accessoryId) => {
     //return Cube.findByIdAndUpdate(cubeId, {$push: {accessories: accessoryId}}); //mongodb way 1 request
 
@@ -42,3 +46,4 @@ exports.attachAccessory = async (cubeId, accessoryId) => {
 
     return cube.save();
 }
+
