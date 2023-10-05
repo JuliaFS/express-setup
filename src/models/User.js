@@ -2,10 +2,9 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
 const userSchema = new mongoose.Schema({
-    name: String,
-    password: String,
-
-});
+    username: String, 
+    password: { type: String }
+  });
 
 userSchema.virtual("repeatPassword").set(function (value) {
   if (value !== this.password) {
@@ -17,6 +16,7 @@ userSchema.virtual("repeatPassword").set(function (value) {
 
 userSchema.pre('save', async function (){
     const hash = await bcrypt.hash(this.password, 10);
+
     this.password = hash;
 });
 
