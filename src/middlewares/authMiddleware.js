@@ -4,14 +4,14 @@ const { SECRET } = require('../config/config');
 exports.auth = async (req, res, next) => {
 
     let token = req.cookies['auth'];
-    console.log(req.cookies)
-    console.log(token + 'this is token');
 
     if(token){
         //we have to validate token
         try{
-            const user = await jwt.verify(token, SECRET);
-            req.user = user;
+            const decodedUser = await jwt.verify(token, SECRET);
+            req.user = decodedUser; //locals jiveqt samo v ramkite na request response cikala
+            res.locals.user = decodedUser;
+            res.locals.isAuthenticated = true; //taka sazdavame promenliva vidima i dostapna samo za render
             next();
         } catch(err){
             res.clearCookie('auth');
@@ -20,4 +20,11 @@ exports.auth = async (req, res, next) => {
     } else {
         next();
     }
+};
+
+exports.isAuthenticated = (req, res) => {
+    if(!req.user){
+        res.redirect('/users/login');
+    }
+    next();
 };

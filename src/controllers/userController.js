@@ -19,6 +19,11 @@ router.get('/login', (req, res) => {
     res.render('users/login');
 });
 
+router.get('/logout', (req, res) => {
+    res.clearCookie('auth');
+    res.redirect('/');
+});
+
 router.post('/login', async (req, res) => {
     const { username, password} = req.body;
 
