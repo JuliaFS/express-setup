@@ -41,7 +41,7 @@ router.get('/:cubeId/details', async (req, res) => {
     if(!cube){
         res.redirect('/404');
     }
-    const isOwner = cube.owner == req.user._id ; //cube.owner?.toString() === req.user._id;
+    const isOwner = cube.owner == req.user?._id ; //cube.owner?.toString() === req.user._id;
                                                 //cube.owner? == conditional chaining  (if owner is undefined)                    
 
     res.render('cube/details', { cube, isOwner });
