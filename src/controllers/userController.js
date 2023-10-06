@@ -1,6 +1,8 @@
 let router = require('express').Router();
 
+const { MongooseError, Error } = require('mongoose');
 const userManager = require('../managers/userManager');
+const { extractErrorMessage } = require('../utils/errorHelpers');
 
 
 router.get('/register', (req, res) => {
@@ -10,9 +12,25 @@ router.get('/register', (req, res) => {
 router.post('/register', async (req, res) => {
     const {username, password, repeatPassword} = req.body;
 
-    await userManager.register({username, password, repeatPassword});
+    try{
+        await userManager.register({username, password, repeatPassword});
 
-    res.redirect('/users/login');
+        res.redirect('/users/login');
+    } catch(error){
+       if(error instanceof MongooseError){
+            return Object.values(error.errors).map( x => x.message);
+       } else if(error instanceof Error){
+            return [error.message];
+       }
+
+        //display just first error message
+        // const firstErrorMessage = Object.values(err.errors)[0].message;
+        // res.status(400).render('users/register', { errorMessage: firstErrorMessage });
+
+        //display all error messages
+        // const firstErrorMessage = Object.values(err.errors).map( x => x.message);
+        // res.status(400).render('users/register', { errorMessage: firstErrorMessage });
+    }
 });
 
 router.get('/login', (req, res) => {
