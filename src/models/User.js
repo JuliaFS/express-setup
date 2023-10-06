@@ -2,8 +2,17 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
 const userSchema = new mongoose.Schema({
-    username: String, 
-    password: { type: String }
+    username: {
+      type: String,
+      required: true,
+      minLength: 5,
+      match: /^[A-za-z]+$/,
+      unique: true
+    }, 
+    password: { 
+      type: String,
+
+    } 
   });
 
 userSchema.virtual("repeatPassword").set(function (value) {

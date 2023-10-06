@@ -1,7 +1,9 @@
 const mongoose = require('mongoose');
 
 const cubeShema = new mongoose.Schema({
-    name: String,
+    name: {
+        type: String,
+    },
     description: String,
     imageUrl: String,
     difficultyLevel: Number,
