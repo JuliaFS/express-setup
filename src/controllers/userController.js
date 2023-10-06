@@ -44,14 +44,18 @@ router.get('/logout', (req, res) => {
     res.redirect('/');
 });
 
-router.post('/login', async (req, res) => {
+router.post('/login', async (req, res, next) => {
     const { username, password} = req.body;
 
-    const token = await userManager.login(username, password);
+    try{
+        const token = await userManager.login(username, password);
 
-    res.cookie('auth', token, { httpOnly: true});
+        res.cookie('auth', token, { httpOnly: true});
 
-    res.redirect('/');
+        res.redirect('/');
+    } catch(error){
+        next(error);
+    }
 });
 
 module.exports = router;

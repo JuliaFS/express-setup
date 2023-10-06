@@ -6,6 +6,7 @@ const dbConnect = require('./config/dbConfig');
 const routes = require('./routes');
 // const homeController = require('./controllers/homeController');
 // const cubeController = require('./controllers/cubeController');
+const errorHandler = require('./middlewares/errorHandler');
 
 const app = express();
 const PORT = 5000;
@@ -24,5 +25,7 @@ app.use(routes);
 // app.get('*', (req, res) => {
 //     res.redirect('/404');
 // })
+
+app.use(errorHandler);
 
 app.listen(PORT, () => console.log(`Server is running on port: ${PORT}...`));
