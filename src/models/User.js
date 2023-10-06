@@ -7,10 +7,10 @@ const userSchema = new mongoose.Schema({
       required: [true, 'Username is requireds'],
       minLength: [5, 'Username must be at least 5 characters.'],
       match: [/^[A-za-z0-9]+$/, 'Username must be alphanumeric'],
-      unique: {
-        value: true,
-        //message: 'Username already exists'
-      }
+      // unique: {
+      //   value: true,
+      //   message: 'Username already exists'
+      // }
     }, 
     password: { 
       type: String,
@@ -26,10 +26,12 @@ const userSchema = new mongoose.Schema({
     } 
   });
 
-  //check TO DO
+ // check TO DO
   userSchema.path('username').validate(function(value){
-    const user = mongoose.model('User').findOne({username: value}); //vrashta []
-    return !user;
+    //const user = mongoose.model('User').exists({username: value}); //vrashta null
+    const user = mongoose.model('User').findOne({username: value}); 
+    console.log(user)
+    return user.options !== null;
   }, 'Username already exists');
 
 userSchema.virtual("repeatPassword").set(function (value) {
