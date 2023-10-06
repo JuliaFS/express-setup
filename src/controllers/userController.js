@@ -14,14 +14,16 @@ router.post('/register', async (req, res) => {
 
     try{
         await userManager.register({username, password, repeatPassword});
-
         res.redirect('/users/login');
     } catch(error){
-       if(error instanceof MongooseError){
-            return Object.values(error.errors).map( x => x.message);
-       } else if(error instanceof Error){
-            return [error.message];
-       }
+        const errorMessages = extractErrorMessage(error);
+        res.status(404).render('users/register', { errorMessages });
+
+    //    if(error instanceof MongooseError){
+    //         return Object.values(error.errors).map( x => x.message);
+    //    } else if(error){
+    //         return [error.message];
+    //    }
 
         //display just first error message
         // const firstErrorMessage = Object.values(err.errors)[0].message;
