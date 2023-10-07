@@ -15,13 +15,13 @@ const userSchema = new mongoose.Schema({
     password: { 
       type: String,
       required: [true, 'Password is required'],
-      //match: [/^[A-za-z0-9]+$/, 'Password must be alphanumeric'],
-      validate: { //ne raboti pri men predpolagam zaradi versiqta na nodejs
-        validator: function(value){
-          return /^[A-za-z0-9]+$/.test(value);
-        },
-        message: 'Invalid password characters!'
-      },
+      match: [/^[A-za-z0-9]+$/, 'Password must be alphanumeric'],
+      // validate: { 
+      //   validator: function(value){
+      //     return /^[A-za-z0-9]+$/.test(value);
+      //   },
+      //   message: 'Invalid password characters!'
+      // },
       minLength: [8, 'Password must be at least 8 characters.'],
     } 
   });
@@ -31,7 +31,7 @@ const userSchema = new mongoose.Schema({
     //const user = mongoose.model('User').exists({username: value}); //vrashta null
     const user = mongoose.model('User').findOne({username: value}); 
     console.log(user)
-    return user.options !== null;
+    return user.index !== null; //have to check
   }, 'Username already exists');
 
 userSchema.virtual("repeatPassword").set(function (value) {
